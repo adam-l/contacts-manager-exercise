@@ -19,8 +19,6 @@ function Form({ mode, onAddNew, onEdit }: {
   onAddNew?: Function,
   onEdit?: Function
 }) {
-  const location: Location = useLocation()
-  const user: User | null = location?.state?.user;
   let navigate: NavigateFunction = useNavigate();
   let initialState = {
     name: '',
@@ -35,6 +33,10 @@ function Form({ mode, onAddNew, onEdit }: {
     isContactValid: false,
     isContactInUse: false
   };
+  const [value, setValue] = useState(initialState);
+  const [contactsData] = useLocalStorage('contactsData', []);
+  const location: Location = useLocation()
+  const user: User | null = location?.state?.user;
 
   if (mode === 'edit' && !user) {
     navigate('/');
@@ -50,8 +52,6 @@ function Form({ mode, onAddNew, onEdit }: {
     initialState.picture = user.picture;
   }
 
-  const [value, setValue] = useState(initialState);
-  const [contactsData] = useLocalStorage('contactsData', []);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const fileReader: FileReader = new FileReader();

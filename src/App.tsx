@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, NavigateFunction, Routes, Route } from 'react-router-dom';
 import Delete from './components/delete/Delete';
 import List from './components/list/List';
